@@ -23,6 +23,20 @@
 #define ERR(_msg, args...) \
     fprintf(stderr, _msg "\n", ##args)
 
+/* Callbacks for our own defined commands */
+typedef void (*cmd_callback_t)(void);
+static void cmd_exit();
+
+struct {
+    const char     *name;
+    cmd_callback_t  callback;
+} static const commands[] = {
+    {"quit", cmd_exit},
+    {".q",   cmd_exit},
+    {"q",    cmd_exit},
+    {"exit", cmd_exit}
+};
+
 static void usage(const char *execname)
 {
     printf("Usage: %s <file.csv>\n", execname);
@@ -250,7 +264,7 @@ static void load_csv(FILE *csv, sqlite3 *sql)
     load_data(csv, sql, n_fields);
 }
 
-/* Callback for each result row. */
+/* Callback for each result row */
 static int row_callback(
     void  *print_header,
     int    n_cols,
@@ -274,6 +288,19 @@ static int row_callback(
     return 0;
 }
 
+/* Returns 'true' if a command is found */
+static _Bool is_command(const char *line)
+{
+    for (int i=0; i<sizeof(commands)/sizeof(commands[0]); ++i) {
+        if (strcmp(commands[i].name, line) == 0) {
+            commands[i].callback();
+            return true;
+        }
+    }
+
+    return false;
+}
+
 /* Query loop utilizing readline for user input */
 static void query_loop(sqlite3 *db)
 {
@@ -281,6 +308,8 @@ static void query_loop(sqlite3 *db)
 
     while ((query = readline(DEFAULT_PROMPT))) {
         _Bool print_header = true;
+        if (is_command(query))
+          continue;
         if (sqlite3_exec(db, query, row_callback,
                          (void *)&print_header, &errmsg)) {
             fprintf(stdout, errmsg);
@@ -288,6 +317,11 @@ static void query_loop(sqlite3 *db)
         }
         add_history(query);
     }
+}
+
+static void cmd_exit(void)
+{
+    exit(EXIT_SUCCESS);
 }
 
 int main(int argc, char **argv)
