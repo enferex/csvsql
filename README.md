@@ -1,12 +1,12 @@
 csvsql: Query a CSV file as a sqlite3 database.
 ===============================================
-csvsql is simple and quick way to take a csv file and query it as if it is a
+csvsql is simple and quick way to take a csv file and query it as if it were a
 SQLite database.
 
 Notes
 -----
-* Comments are prefixed with '#'.
-* Delimiters are ','.
+* Comments are prefixed with an octothorpe '#'
+* The delimiter is the comma ','
 * If a comment line exists before the  first line of csv data, that line will be
   parsed. If that comment line looks like a csv description the columns of the
   table will be named accordingly.
