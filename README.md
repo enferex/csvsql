@@ -7,6 +7,9 @@ Notes
 -----
 * Comments are prefixed with an octothorpe '#'
 * The delimiter is the comma ','
+* All data is created in memory and associated to a table named 'csv'.
+* All instances of the delimiter are considered. If the delimiter is within
+  a string, csvsql will believe that delimiter is a true one and your
 * If a comment line exists before the  first line of csv data, that line will be
   parsed. If that comment line looks like a csv description the columns of the
   table will be named accordingly.
@@ -14,11 +17,8 @@ Notes
   column name, then columns will be named 'Cx' where 'x' is a monotonically
   increasing integer from 0 to n.  Where 'n' is the number of columns in a row
   of csv data.
-* All instances of the delimiter are considered. If the delimiter is within
-  a string, csvsql will believe that delimiter is a true one and your
   results will probably be wrong.
-* All data is created in memory and associated to a table named 'csv'.
-* Output from '.' SQLite commands is not displayed, only query
+* Output from '.' SQLite commands are not displayed, only query
   results and errors are displayed.
 
 Dependencies
