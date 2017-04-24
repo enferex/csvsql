@@ -1,6 +1,6 @@
 APP     = csvsql
 CC      = gcc
-CFLAGS  = -O0 -g3 -DDEBUG
+CFLAGS  = -O0 -g3 -Wall
 LDFLAGS = -lsqlite3 -lreadline
 
 all: $(APP)
