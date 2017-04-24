@@ -9,7 +9,8 @@ Notes
 * The delimiter is the comma ','
 * All data is created in memory and associated to a table named 'csv'.
 * All instances of the delimiter are considered. If the delimiter is within
-  a string, csvsql will believe that delimiter is a true one and your
+  a string, csvsql will believe that delimiter is a true one and your results
+  will be wrong.
 * If a comment line exists before the  first line of csv data, that line will be
   parsed. If that comment line looks like a csv description the columns of the
   table will be named accordingly.
