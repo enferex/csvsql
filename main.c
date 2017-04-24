@@ -98,6 +98,10 @@ static char *trim(char *line)
         break;
     c[i+1] = '\0';
 
+    /* Rip off any comments */
+    if ((c = strchr(line, DEFAULT_COMMENT_C)))
+      *c = '\0';
+
     return line;
 }
 
