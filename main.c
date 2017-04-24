@@ -219,7 +219,7 @@ static void create_table(sqlite3 *sql, char **fields, int n_fields)
     /* Length of all column names and some extra */
     for (int i=0; i<n_fields; ++i)
       len += strlen(fields[i]);
-    len += n_fields + 32;
+    len += 32 + (n_fields * 8); /* extra */
 
     if (!(query = malloc(len)))
       ERR("Could not allocate database schema.");
