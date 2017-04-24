@@ -350,7 +350,7 @@ static void query_loop(sqlite3 *db)
           continue;
         if (sqlite3_exec(db, query, row_callback,
                          (void *)&print_header, &errmsg)) {
-            fprintf(stdout, errmsg);
+            fprintf(stdout, "Error %s\n", errmsg);
             free(errmsg);
         }
         add_history(query);
