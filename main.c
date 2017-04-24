@@ -140,7 +140,7 @@ static char **define_ncols(int n_cols)
 
     for (int i=0; i<n_cols; ++i) {
         char buf[32];
-        sprintf(buf, "column%d", i);
+        sprintf(buf, "C%d", i);
         cols[i] = strdup(buf);
         if (!cols[i])
           ERR("Error allocating column header.");
