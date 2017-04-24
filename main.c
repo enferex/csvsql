@@ -81,7 +81,7 @@ static void usage(const char *execname)
 static char *trim(char *line)
 {
     int i;
-    char *end, *c;
+    char *c;
 
     if (!line)
       return NULL;
@@ -360,11 +360,10 @@ static void cmd_exit(void)
 
 int main(int argc, char **argv)
 {
-    int         db_fd, err;
+    int         err;
     FILE       *csv_fp;
     sqlite3    *db;
     const char *fname;
-    char        dbname[16] = "csvsqlXXXXXX";
 
     if (argc != 2)
       usage(argv[0]);
@@ -394,7 +393,6 @@ int main(int argc, char **argv)
     query_loop(db);
 
     sqlite3_close(db);
-    close(db_fd);
     fclose(csv_fp);
 
     return 0;
