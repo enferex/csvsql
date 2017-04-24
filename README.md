@@ -1,7 +1,7 @@
 csvsql: Query a CSV file as a sqlite3 database.
 ===============================================
-csvsql is simple and quick way to take a csv file and query it as if it were a
-sqlite3 database.
+csvsql is simple and quick way to take a csv file and query it as if it is a
+SQLite database.
 
 Notes
 -----
