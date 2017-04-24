@@ -42,18 +42,20 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-#define DEFAULT_COMMENT   "#"
-#define DEFAULT_DELIMITER ","
-#define DEFAULT_PROMPT    "sql> "
-#define DEFAULT_DB        ":memory:"
-#define DEFAULT_TABLE     "csv"
-#define MAX_LINE_LENGTH   1024
+#define DEFAULT_COMMENT     "#"
+#define DEFAULT_COMMENT_C   '#'
+#define DEFAULT_DELIMITER   ","
+#define DEFAULT_DELIMITER_C ','
+#define DEFAULT_PROMPT      "sql> "
+#define DEFAULT_DB          ":memory:"
+#define DEFAULT_TABLE       "csv"
+#define MAX_LINE_LENGTH     1024
 
 #define IS_COMMENT(_c)   ((_c) == DEFAULT_COMMENT[0])
 #define IS_DELIMITER(_c) ((_c) == DEFAULT_DELIMITER[0])
 
-#define ERR(_msg, args...) \
-    fprintf(stderr, _msg "\n", ##args)
+#define ERR(_msg, ...) \
+    fprintf(stderr, _msg "\n", ## __VA_ARGS__)
 
 /* Callbacks for our own defined commands */
 typedef void (*cmd_callback_t)(void);
